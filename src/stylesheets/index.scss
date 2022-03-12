@@ -1,0 +1,96 @@
+@use 'bs';
+
+body {
+	background-color: #090922;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+#app {
+	background-color: #090922;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+}
+
+.game {
+	flex-grow: 1;
+	display: flex;
+	flex-flow: row;
+}
+
+.board {
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column;
+	margin: 1rem;
+}
+
+.guess {
+	flex-basis: 2rem;
+	flex-grow: 1;
+
+	display: flex;
+	flex-flow: row;
+}
+
+.letter-container {
+	transition: background-color linear 150ms;
+	min-width: 2rem;
+	min-height: 2rem;
+	position: relative;
+	flex-grow: 1;
+	&.active {
+		min-height: 3rem;
+	}
+
+	margin: 0.25rem;
+	color: white;
+
+	&.letter-blank {
+		background-color: #111;
+		border: 1px solid #444;
+	}
+	&.letter-grey {
+		background-color: #444;
+	}
+	&.letter-green {
+		background-color: #4ba118;
+	}
+	&.letter-yellow {
+		background-color: #f5b811;
+	}
+	&.letter-blue {
+		background-color: #305080;
+	}
+}
+
+.letter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-transform: uppercase;
+	font-weight: 600;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5rem;
+
+	&.typing-letter-blue {
+		color: #4486ea;
+	}
+	&.typing-letter-red {
+		color: #e22;
+	}
+}
+
+.answer {
+	font-weight: 700;
+	text-transform: uppercase;
+}
+.answer-correct {
+	color: #22f044;
+}
+.answer-incorrect {
+	color: #e55;
+}
