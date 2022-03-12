@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from 'react'
 import { Button, Modal, Nav } from 'react-bootstrap'
+import { loadState } from '..'
 import GameState, { LetterColor } from '../state'
 import Letter from './letter'
 import WordList from './word-list'
@@ -22,7 +23,13 @@ const Fail: FunctionComponent<{ state: GameState }> = ({ state }) => {
 				</Modal.Header>
 				<Modal.Body>
 					<WordList state={state} />
-					<Button onClick={handleClose} href="#random">
+					<Button
+						onClick={() => {
+							handleClose()
+							loadState()
+						}}
+						href="#random"
+					>
 						Play Random
 					</Button>
 				</Modal.Body>

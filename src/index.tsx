@@ -11,7 +11,10 @@ export function loadState() {
 		case '#random':
 			if (localStorage.getItem('randomSeed') !== null) {
 				state = GameState.load('random')
-				if (state.guessCount() >= 11) {
+				if (
+					!state.boards.some(board => board.active) ||
+					state.guessCount() >= 11
+				) {
 					state = GameState.random()
 				}
 			} else {
