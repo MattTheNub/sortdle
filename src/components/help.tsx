@@ -44,7 +44,7 @@ const Help: FunctionComponent = () => {
 					<p>
 						These letters appear as blue instead of grey or yellow. This means
 						that they <em>might</em> be in the word, but if they are, they are
-						not in the correct possition. No more than <strong>three</strong>{' '}
+						not in the correct position. No more than <strong>three</strong>{' '}
 						blue letters will appear in any word.
 					</p>
 					<h3>Swaps</h3>
