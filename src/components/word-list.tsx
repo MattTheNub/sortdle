@@ -4,6 +4,10 @@ import GameState, { LetterColor } from '../state'
 import Letter from './letter'
 
 const WordList: FunctionComponent<{ state: GameState }> = ({ state }) => {
+	if (!state.boards[0].guesses.length) {
+		return <></>
+	}
+
 	return (
 		<>
 			{state.boards.map((board, i) => (
