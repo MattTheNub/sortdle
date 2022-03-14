@@ -36,7 +36,7 @@ export function loadState() {
 loadState()
 window.addEventListener('hashchange', loadState)
 
-function update() {
+export function update() {
 	state.save()
 	render(
 		<Game state={state} />,

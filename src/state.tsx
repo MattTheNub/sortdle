@@ -87,7 +87,9 @@ export default class GameState {
 			} else if (this.guessCount() >= 11) {
 				this.wantsFailDialog = true
 			}
+			return true
 		}
+		return false
 	}
 
 	save() {

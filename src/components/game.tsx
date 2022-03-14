@@ -1,35 +1,15 @@
 import { FunctionComponent } from 'react'
-import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { loadState } from '..'
 import GameState from '../state'
 import Board from './board'
 import Complete from './complete'
 import Fail from './fail'
 import Guess from './guess'
-import Help from './help'
+import Keyboard from './keyboard'
+import SortdleNav from './nav'
 
 const Game: FunctionComponent<{ state: GameState }> = ({ state }) => (
 	<>
-		<Navbar sticky="top" variant="dark" bg="dark" expand>
-			<Container>
-				<Navbar.Brand href="#daily">Sortdle</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav>
-						<Nav.Link href="#daily" active={window.location.hash !== '#random'}>
-							Daily
-						</Nav.Link>
-						<Nav.Link
-							href="#random"
-							active={window.location.hash === '#random'}
-						>
-							Random
-						</Nav.Link>
-						<Help />
-					</Nav>
-				</Navbar.Collapse>
-			</Container>
-		</Navbar>
+		<SortdleNav mode="top" />
 		<Complete state={state} />
 		<Fail state={state} />
 		<div className="game">
@@ -59,7 +39,9 @@ const Game: FunctionComponent<{ state: GameState }> = ({ state }) => (
 
 				return <Board key={i}>{guesses}</Board>
 			})}
+			<SortdleNav mode="grid" />
 		</div>
+		<Keyboard state={state} />
 	</>
 )
 
