@@ -27,9 +27,9 @@ const Help: FunctionComponent = () => {
 					</div>
 					<p>
 						In this example, the letter B is green, meaning it is in the correct
-						position. The letters U and L yellow, meaning they are in the word,
-						but in the wrong positions. The letters K and Y are grey, meaning
-						they are not in the word.
+						position. The letters U and L are yellow, meaning they are in the
+						word, but in the wrong positions. The letters K and Y are grey,
+						meaning they are not in the word.
 					</p>
 					<h3>
 						Blue letters:{' '}
