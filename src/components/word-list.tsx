@@ -1,7 +1,5 @@
 import { FunctionComponent, useState } from 'react'
-import { Button, Modal, Nav } from 'react-bootstrap'
-import GameState, { LetterColor } from '../state'
-import Letter from './letter'
+import GameState from '../state'
 
 const WordList: FunctionComponent<{ state: GameState }> = ({ state }) => {
 	if (!state.boards[0].guesses.length) {

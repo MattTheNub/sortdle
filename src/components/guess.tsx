@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { allowedWords } from '../assets'
-import { LetterColor, LetterGuess } from '../state'
+import { LetterColor } from '../state'
 import Letter from './letter'
 
 const Guess: FunctionComponent<{

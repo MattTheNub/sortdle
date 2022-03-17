@@ -1,8 +1,7 @@
 import { FunctionComponent, useState } from 'react'
-import { Button, Modal, Nav } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { loadState } from '..'
-import GameState, { LetterColor } from '../state'
-import Letter from './letter'
+import GameState from '../state'
 import WordList from './word-list'
 
 const Complete: FunctionComponent<{ state: GameState }> = ({ state }) => {
