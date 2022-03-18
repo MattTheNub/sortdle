@@ -15,7 +15,7 @@ const WordList: FunctionComponent<{ state: GameState }> = ({ state }) => {
 						board.active ? 'answer-incorrect' : 'answer-correct'
 					}`}
 				>
-					{board.word}
+					{board.loadedWord}
 				</p>
 			))}
 		</>

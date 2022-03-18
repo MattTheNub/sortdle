@@ -2,7 +2,6 @@ import { FunctionComponent, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { loadState } from '..'
 import GameState from '../state'
-import Letter from './letter'
 import WordList from './word-list'
 
 const Fail: FunctionComponent<{ state: GameState }> = ({ state }) => {

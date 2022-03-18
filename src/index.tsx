@@ -1,12 +1,14 @@
 import './stylesheets/index.scss'
 import { render } from 'react-dom'
-import GameState, { getDailySeed } from './state'
-import Game from './components/game'
+import GameState from './state'
 import { LETTERS } from './constants'
+import Game from './components/game'
 
 let state: GameState
 
-export function loadState() {
+export async function loadState() {
+	const { default: GameState, getDailySeed } = await import('./state')
+
 	switch (window.location.hash.toLowerCase()) {
 		case '#random':
 			if (localStorage.getItem('randomSeed') !== null) {
@@ -50,12 +52,12 @@ document.addEventListener('keypress', event => {
 		update()
 	}
 })
-document.addEventListener('keydown', event => {
+document.addEventListener('keydown', async event => {
 	if (event.key === 'Backspace') {
 		state.curGuess = state.curGuess.slice(0, state.curGuess.length - 1)
 		update()
 	} else if (event.code === 'Enter') {
-		state.submit()
+		await state.submit()
 		update()
 	}
 })

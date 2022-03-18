@@ -1,10 +1,13 @@
-import { allowedWords, answers } from './assets'
 import { BANNED_LETTERS } from './constants'
 import seedrandom from 'seedrandom'
 
 export function getDailySeed() {
 	return Math.floor((Date.now() / 1000 / 60 / 60 - 4) / 24)
 }
+
+const assets = import('./assets')
+const answers = assets.then(assets => assets.answers)
+const allowedWords = assets.then(assets => assets.allowedWords)
 
 export default class GameState {
 	boards: BoardState[] = []
@@ -18,7 +21,11 @@ export default class GameState {
 
 		for (let i = 0; i < 5; i++) {
 			this.boards.push(
-				new BoardState(answers[Math.abs(rng.int32()) % answers.length]),
+				new BoardState(
+					answers.then(
+						answers => answers[Math.abs(rng.int32()) % answers.length],
+					),
+				),
 			)
 		}
 	}
@@ -53,11 +60,11 @@ export default class GameState {
 		return state
 	}
 
-	submit() {
+	async submit() {
 		if (
 			this.guessCount() < 11 &&
 			this.curGuess.length === 5 &&
-			allowedWords.has(this.curGuess)
+			(await allowedWords).has(this.curGuess)
 		) {
 			const activeBoards = [0, 1, 2, 3, 4].filter(i => this.boards[i].active)
 
@@ -76,7 +83,7 @@ export default class GameState {
 				this.swap(activeBoards[first], activeBoards[second])
 			}
 			for (const i of activeBoards) {
-				this.boards[i].guess(this.curGuess)
+				await this.boards[i].guess(this.curGuess)
 			}
 			this.curGuess = ''
 
@@ -122,15 +129,21 @@ export default class GameState {
 export class BoardState {
 	guesses: LetterGuess[][] = []
 	active = true
+	loadedWord: string | null = null
 
-	constructor(public word: string) {}
+	constructor(public word: Promise<string>) {
+		word.then(word => {
+			this.loadedWord = word
+		})
+	}
 
-	guess(guess: string) {
+	async guess(guess: string) {
+		const word = await this.word
 		const letters = []
-		const unusedLetters = [...this.word] // for double letters
+		const unusedLetters = [...word] // for double letters
 
 		for (let i = 0; i < guess.length; i++) {
-			if (this.word[i] == guess[i]) {
+			if (word[i] == guess[i]) {
 				delete unusedLetters[unusedLetters.indexOf(guess[i])]
 			}
 		}
@@ -138,7 +151,7 @@ export class BoardState {
 		for (let i = 0; i < guess.length; i++) {
 			const letter = guess[i]
 			let color
-			if (this.word[i] === letter) {
+			if (word[i] === letter) {
 				color = LetterColor.Green
 			} else if (BANNED_LETTERS.has(letter)) {
 				color = LetterColor.Blue
@@ -157,7 +170,7 @@ export class BoardState {
 
 		this.guesses.push(letters)
 
-		if (this.word === guess) {
+		if (word === guess) {
 			this.active = false
 		}
 	}
