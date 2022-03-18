@@ -16,30 +16,43 @@ export default class GameState {
 	wantsCompleteDialog = false
 	wantsFailDialog = false
 
-	constructor(public readonly seed: string, public readonly prefix: string) {
+	constructor(
+		public readonly seed: string,
+		public readonly prefix: string,
+		public allowedWords: Set<string>,
+		answers: string[],
+	) {
 		const rng = seedrandom(seed)
 
 		for (let i = 0; i < 5; i++) {
 			this.boards.push(
-				new BoardState(
-					answers.then(
-						answers => answers[Math.abs(rng.int32()) % answers.length],
-					),
-				),
+				new BoardState(answers[Math.abs(rng.int32()) % answers.length]),
 			)
 		}
 	}
 
-	static random() {
-		return new GameState(Math.random().toString(), 'random')
+	static async random() {
+		return new GameState(
+			Math.random().toString(),
+			'random',
+			await allowedWords,
+			await answers,
+		)
 	}
-	static daily() {
-		return new GameState(getDailySeed().toString(), 'daily')
+	static async daily() {
+		return new GameState(
+			getDailySeed().toString(),
+			'daily',
+			await allowedWords,
+			await answers,
+		)
 	}
-	static load(prefix: string) {
+	static async load(prefix: string) {
 		let state = new GameState(
 			localStorage.getItem(`${prefix}Seed`) as string,
 			prefix,
+			await allowedWords,
+			await answers,
 		)
 
 		// load the previous guesses and hints
@@ -64,7 +77,7 @@ export default class GameState {
 		if (
 			this.guessCount() < 11 &&
 			this.curGuess.length === 5 &&
-			(await allowedWords).has(this.curGuess)
+			this.allowedWords.has(this.curGuess)
 		) {
 			const activeBoards = [0, 1, 2, 3, 4].filter(i => this.boards[i].active)
 
@@ -80,7 +93,7 @@ export default class GameState {
 				do {
 					second = Math.floor(Math.random() * activeBoards.length)
 				} while (second === first)
-				this.swap(activeBoards[first], activeBoards[second])
+				await this.swap(activeBoards[first], activeBoards[second])
 			}
 			for (const i of activeBoards) {
 				await this.boards[i].guess(this.curGuess)
@@ -108,7 +121,7 @@ export default class GameState {
 		localStorage.setItem(`${this.prefix}Seed`, this.seed)
 	}
 
-	swap(first: number, second: number, log: boolean = true) {
+	async swap(first: number, second: number, log: boolean = true) {
 		const temp = this.boards[first].word
 		this.boards[first].word = this.boards[second].word
 		this.boards[second].word = temp
@@ -129,16 +142,11 @@ export default class GameState {
 export class BoardState {
 	guesses: LetterGuess[][] = []
 	active = true
-	loadedWord: string | null = null
 
-	constructor(public word: Promise<string>) {
-		word.then(word => {
-			this.loadedWord = word
-		})
-	}
+	constructor(public word: string) {}
 
-	async guess(guess: string) {
-		const word = await this.word
+	guess(guess: string) {
+		const word = this.word
 		const letters = []
 		const unusedLetters = [...word] // for double letters
 

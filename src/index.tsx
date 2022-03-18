@@ -12,23 +12,23 @@ export async function loadState() {
 	switch (window.location.hash.toLowerCase()) {
 		case '#random':
 			if (localStorage.getItem('randomSeed') !== null) {
-				state = GameState.load('random')
+				state = await GameState.load('random')
 				if (
 					!state.boards.some(board => board.active) ||
 					state.guessCount() >= 11
 				) {
-					state = GameState.random()
+					state = await GameState.random()
 				}
 			} else {
-				state = GameState.random()
+				state = await GameState.random()
 			}
 			break
 
 		default:
 			if (localStorage.getItem('dailySeed') === getDailySeed().toString()) {
-				state = GameState.load('daily')
+				state = await GameState.load('daily')
 			} else {
-				state = GameState.daily()
+				state = await GameState.daily()
 			}
 	}
 
