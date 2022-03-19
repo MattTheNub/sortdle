@@ -1,7 +1,7 @@
 {
 	"extends": "@parcel/config-default",
 	"transformers": {
-		"node_modules/**.{ts,tsx}": [
+		"node_modules/**/*.{ts,tsx}": [
 			"@parcel/transformer-typescript-tsc"
 		]
 	}
