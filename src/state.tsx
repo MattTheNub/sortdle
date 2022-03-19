@@ -73,7 +73,7 @@ export default class GameState {
 		return state
 	}
 
-	async submit() {
+	submit() {
 		if (
 			this.guessCount() < 11 &&
 			this.curGuess.length === 5 &&
@@ -93,10 +93,10 @@ export default class GameState {
 				do {
 					second = Math.floor(Math.random() * activeBoards.length)
 				} while (second === first)
-				await this.swap(activeBoards[first], activeBoards[second])
+				this.swap(activeBoards[first], activeBoards[second])
 			}
 			for (const i of activeBoards) {
-				await this.boards[i].guess(this.curGuess)
+				this.boards[i].guess(this.curGuess)
 			}
 			this.curGuess = ''
 
@@ -121,7 +121,7 @@ export default class GameState {
 		localStorage.setItem(`${this.prefix}Seed`, this.seed)
 	}
 
-	async swap(first: number, second: number, log: boolean = true) {
+	swap(first: number, second: number, log: boolean = true) {
 		const temp = this.boards[first].word
 		this.boards[first].word = this.boards[second].word
 		this.boards[second].word = temp
