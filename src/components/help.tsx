@@ -15,24 +15,31 @@ const Help: FunctionComponent = () => {
 			<Nav.Link onClick={handleShow}>Help</Nav.Link>
 
 			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>Sortdle</Modal.Header>
+				<Modal.Header closeButton>How to Play Sortdle</Modal.Header>
 				<Modal.Body>
-					<h3>Normal Hints</h3>
-					<div style={{ display: 'inline-flex', flexFlow: 'row' }}>
-						<Letter color={LetterColor.Green}>B</Letter>
-						<Letter color={LetterColor.Yellow}>U</Letter>
-						<Letter color={LetterColor.Yellow}>L</Letter>
-						<Letter color={LetterColor.Grey}>K</Letter>
-						<Letter color={LetterColor.Grey}>Y</Letter>
-					</div>
 					<p>
-						In this example, the letter B is green, meaning it is in the correct
-						position. The letters U and L are yellow, meaning they are in the
-						word, but in the wrong positions. The letters K and Y are grey,
-						meaning they are not in the word.
+						In Sortdle, your aim is to guess five different five-letter words
+						simultaneously. You get 11 tries to do this. On each try, you can
+						make <strong>one</strong> guess. The same guess appear on{' '}
+						<strong>all five</strong> boards, showing you how close you were to
+						each word.
 					</p>
+					<h3>Normal Letters</h3>
+					<p>For most letters, they will appear as one of:</p>
+					<ul>
+						<li>
+							<strong>Grey:</strong> The letter is not anywhere in the word
+						</li>
+						<li>
+							<strong>Yellow:</strong> The letter is in the word, but in the
+							wrong spot
+						</li>
+						<li>
+							<strong>Green:</strong> The letter is in the correct spot
+						</li>
+					</ul>
 					<h3>
-						Blue letters:{' '}
+						Blue Letters:{' '}
 						<div style={{ display: 'inline-flex', flexFlow: 'row' }}>
 							{[...BANNED_LETTERS.values()].map((val, i) => (
 								<Letter key={i} color={LetterColor.Blue}>
@@ -42,17 +49,33 @@ const Help: FunctionComponent = () => {
 						</div>
 					</h3>
 					<p>
-						These letters appear as blue instead of grey or yellow. This means
-						that they <em>might</em> be in the word, but if they are, they are
-						not in the correct position. No more than <strong>three</strong>{' '}
-						blue letters will appear in any word.
+						For the six letters listed above, they will still appear as green if
+						they are in the correct spot, but both grey and yellow hints are
+						replaced with blue. A blue color does not tell you whether a letter
+						is in the word; it only tells you that if it is, it is definitely in
+						the wrong spot.
+					</p>
+					<h3>Example</h3>
+					<div style={{ display: 'inline-flex', flexFlow: 'row' }}>
+						<Letter color={LetterColor.Green}>A</Letter>
+						<Letter color={LetterColor.Grey}>M</Letter>
+						<Letter color={LetterColor.Yellow}>P</Letter>
+						<Letter color={LetterColor.Green}>L</Letter>
+						<Letter color={LetterColor.Blue}>E</Letter>
+					</div>
+					<p>
+						In this example, we know that the two green letters are in the
+						correct positions. The letter M is not in the word, while the letter
+						P is. We do not know if the letter E is in the word, but the word
+						definitely does not end with an E.
 					</p>
 					<h3>Swaps</h3>
 					<p>
-						Every time you make a guess, two words will swap at random without
-						your knowledge (if you only have two words left, this only happens
-						50% of the time). This means a board might start displaying new
-						hints that are inconsistent with its previous hints.
+						To make the game more interesting, each time you make a guess, two
+						words will swap at random (this always happens when at least 3
+						boards are left, and happens half the time if only 2 are left). When
+						a word swaps, a board will start displaying hints for its new word
+						for future guesses, but its old hints will not change.
 					</p>
 				</Modal.Body>
 			</Modal>

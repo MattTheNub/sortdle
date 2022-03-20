@@ -68,6 +68,17 @@ body {
 	@media (max-width: $small-width) {
 		margin: 0.2rem;
 	}
+
+	@for $i from 1 through 5 {
+		&:nth-child(#{$i})::before {
+			content: 'Board #{$i}';
+			font-weight: 700;
+			text-align: center;
+			@media (min-width: $small-width) {
+				font-size: 1.2rem;
+			}
+		}
+	}
 }
 
 .guess {
