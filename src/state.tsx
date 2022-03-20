@@ -25,9 +25,11 @@ export default class GameState {
 		const rng = seedrandom(seed)
 
 		for (let i = 0; i < 5; i++) {
-			this.boards.push(
-				new BoardState(answers[Math.abs(rng.int32()) % answers.length]),
-			)
+			let answer: string
+			do {
+				answer = answers[Math.abs(rng.int32()) % answers.length]
+			} while (this.boards.some(board => board.word === answer))
+			this.boards.push(new BoardState(answer))
 		}
 	}
 
