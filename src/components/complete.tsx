@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { loadState } from '..'
 import GameState from '../state'
+import ShareButton from './share-button'
 import WordList from './word-list'
 
 const Complete: FunctionComponent<{ state: GameState }> = ({ state }) => {
@@ -31,6 +32,7 @@ const Complete: FunctionComponent<{ state: GameState }> = ({ state }) => {
 					>
 						Play Random
 					</Button>
+					{state.prefix === 'daily' && <ShareButton state={state} />}
 				</Modal.Body>
 			</Modal>
 		</>

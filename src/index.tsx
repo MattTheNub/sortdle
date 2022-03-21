@@ -26,7 +26,10 @@ export async function loadState() {
 
 		default:
 			if (localStorage.getItem('dailySeed') === getDailySeed().toString()) {
-				state = await GameState.load('daily')
+				if (state?.prefix !== 'daily') {
+					state = await GameState.load('daily')
+					state.dialogCheck()
+				}
 			} else {
 				state = await GameState.daily()
 			}

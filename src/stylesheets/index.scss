@@ -218,3 +218,8 @@ body {
 		}
 	}
 }
+
+.share-text {
+	user-select: all;
+	font-family: var(--bs-font-sans-serif);
+}

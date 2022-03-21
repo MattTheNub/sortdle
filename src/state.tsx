@@ -104,11 +104,7 @@ export default class GameState {
 
 			// check if there are any active boards left,
 			// and if there are guesses left
-			if (!activeBoards.some(i => this.boards[i].active)) {
-				this.wantsCompleteDialog = true
-			} else if (this.guessCount() >= 11) {
-				this.wantsFailDialog = true
-			}
+			this.dialogCheck()
 			return true
 		}
 		return false
@@ -138,6 +134,14 @@ export default class GameState {
 			(prev, cur) => Math.max(prev, cur.guesses.length),
 			0,
 		)
+	}
+
+	dialogCheck() {
+		if (!this.boards.some(board => board.active)) {
+			this.wantsCompleteDialog = true
+		} else if (this.guessCount() >= 11) {
+			this.wantsFailDialog = true
+		}
 	}
 }
 
