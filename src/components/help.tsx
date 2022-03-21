@@ -55,6 +55,10 @@ const Help: FunctionComponent = () => {
 						is in the word; it only tells you that if it is, it is definitely in
 						the wrong spot.
 					</p>
+					<p>
+						There can be at most <strong>three</strong> blue letters in any
+						word.
+					</p>
 					<h3>Example</h3>
 					<div style={{ display: 'inline-flex', flexFlow: 'row' }}>
 						<Letter color={LetterColor.Green}>A</Letter>
