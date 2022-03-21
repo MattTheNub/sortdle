@@ -103,11 +103,8 @@ const Share: FunctionComponent<{ state: GameState }> = ({ state }) => {
 			title: 'Daily Sortdle',
 			files: [new File([image], 'sortdle.png')],
 		}
-		if (isMobile() && navigator.share) {
+		if (navigator.share) {
 			navigator.share(shareData).catch(console.error)
-		} else {
-			const url = URL.createObjectURL(image)
-			window.open(url)
 		}
 	}
 
@@ -115,6 +112,11 @@ const Share: FunctionComponent<{ state: GameState }> = ({ state }) => {
 		<>
 			<Button onClick={shareText}>Share Text</Button>
 			{image && <Button onClick={shareImage}>Share Image</Button>}
+			{image && (
+				<Button as="a" href={URL.createObjectURL(image)} download="sortdle.png">
+					Save Image
+				</Button>
+			)}
 			{text && (
 				<pre className="share-text">
 					Daily Sortdle{'\n'}
