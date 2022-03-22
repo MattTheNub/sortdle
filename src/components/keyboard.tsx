@@ -1,7 +1,8 @@
 import { FunctionComponent, useState } from 'react'
 import { Button, CloseButton } from 'react-bootstrap'
 import { update } from '..'
-import GameState from '../state'
+import { BANNED_LETTERS } from '../constants'
+import GameState, { LetterColor } from '../state'
 import Guess from './guess'
 
 const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
@@ -49,21 +50,51 @@ const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
 									Del
 								</Button>
 							)}
-							{[...row].map(letter => (
-								<Button
-									variant="secondary"
-									className="keyboard-key"
-									size="sm"
-									onClick={() => {
-										if (state.curGuess.length < 5) {
-											state.curGuess += letter
-											update()
+							{[...row].map(letter => {
+								let colorClass = ''
+
+								if (BANNED_LETTERS.has(letter)) {
+									colorClass = 'key-blue'
+								} else {
+									// check all letters were grey the last time
+									// this letter was guessed
+									const guesses = state.guesses()
+
+									outer: for (let i = guesses.length - 1; i >= 0; i--) {
+										if (guesses[i].includes(letter)) {
+											for (const board of state.boards) {
+												if (
+													board.guesses[i]?.some(
+														guess =>
+															guess.letter === letter &&
+															guess.color !== LetterColor.Grey,
+													)
+												) {
+													break outer
+												}
+											}
+											colorClass = 'key-inactive'
+											break
 										}
-									}}
-								>
-									{letter}
-								</Button>
-							))}
+									}
+								}
+
+								return (
+									<Button
+										variant="secondary"
+										className={`keyboard-key ${colorClass}`}
+										size="sm"
+										onClick={() => {
+											if (state.curGuess.length < 5) {
+												state.curGuess += letter
+												update()
+											}
+										}}
+									>
+										{letter}
+									</Button>
+								)
+							})}
 							{i === 2 && (
 								<Button
 									variant="secondary"

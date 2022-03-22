@@ -214,6 +214,16 @@ body {
 				flex-basis: 1rem;
 				max-width: 5rem;
 				flex-grow: 1;
+
+				&.key-blue {
+					background-color: #5c6399;
+					border-color: #5c6399;
+				}
+				&.key-inactive {
+					background-color: #444;
+					border-color: #444;
+					color: #aaa;
+				}
 			}
 		}
 	}

@@ -136,6 +136,16 @@ export default class GameState {
 		)
 	}
 
+	guesses() {
+		const longest = this.boards.reduce((prev, cur) =>
+			prev.guesses.length > cur.guesses.length ? prev : cur,
+		)
+
+		return longest.guesses.map(guess =>
+			guess.map(letter => letter.letter).join(''),
+		)
+	}
+
 	dialogCheck() {
 		if (!this.boards.some(board => board.active)) {
 			this.wantsCompleteDialog = true
