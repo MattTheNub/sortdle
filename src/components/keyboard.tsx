@@ -100,8 +100,8 @@ const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
 									variant="secondary"
 									className="keyboard-key"
 									size="sm"
-									onClick={async () => {
-										if (await state.submit()) {
+									onClick={() => {
+										if (state.submit()) {
 											setShow(false)
 										}
 										update()

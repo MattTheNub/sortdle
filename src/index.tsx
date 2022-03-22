@@ -55,12 +55,12 @@ document.addEventListener('keypress', event => {
 		update()
 	}
 })
-document.addEventListener('keydown', async event => {
+document.addEventListener('keydown', event => {
 	if (event.key === 'Backspace') {
 		state.curGuess = state.curGuess.slice(0, state.curGuess.length - 1)
 		update()
 	} else if (event.code === 'Enter') {
-		await state.submit()
+		state.submit()
 		update()
 	}
 })
