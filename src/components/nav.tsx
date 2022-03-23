@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import Help from './help'
+// @ts-ignore
+import icon from '../../assets/icon.png'
 
 const SortdleNav: FunctionComponent<{ mode: 'top' | 'grid' }> = ({ mode }) => (
 	<Navbar
@@ -11,7 +13,10 @@ const SortdleNav: FunctionComponent<{ mode: 'top' | 'grid' }> = ({ mode }) => (
 		expand
 	>
 		<Container>
-			<Navbar.Brand href="#daily">Sortdle</Navbar.Brand>
+			<Navbar.Brand href="#daily">
+				<img className="icon" src={icon} />
+				Sortdle
+			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav>
