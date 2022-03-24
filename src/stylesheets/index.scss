@@ -224,14 +224,26 @@ body {
 				max-width: 5rem;
 				flex-grow: 1;
 
+				@mixin key-color($color) {
+					background-color: $color;
+					border-color: $color;
+					&:active,
+					&:hover,
+					&:focus {
+						background-color: darken($color, 10%);
+						border-color: darken($color, 10%);
+					}
+				}
+
 				&.key-blue {
-					background-color: #5c6399;
-					border-color: #5c6399;
+					@include key-color(#5c6399);
 				}
 				&.key-inactive {
-					background-color: #444;
-					border-color: #444;
+					@include key-color(#444);
 					color: #aaa;
+				}
+				&.key-green-yellow {
+					@include key-color(#78c710);
 				}
 			}
 		}

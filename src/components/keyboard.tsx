@@ -60,8 +60,10 @@ const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
 									// this letter was guessed
 									const guesses = state.guesses()
 
-									outer: for (let i = guesses.length - 1; i >= 0; i--) {
+									for (let i = guesses.length - 1; i >= 0; i--) {
 										if (guesses[i].includes(letter)) {
+											let greenYellow = 0
+											let grey = 0
 											for (const board of state.boards) {
 												if (
 													board.guesses[i]?.some(
@@ -70,10 +72,30 @@ const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
 															guess.color !== LetterColor.Grey,
 													)
 												) {
-													break outer
+													greenYellow++
+												} else if (
+													board.guesses[i]?.some(
+														guess =>
+															guess.letter === letter &&
+															guess.color === LetterColor.Grey,
+													)
+												) {
+													grey++
+												}
+												if (
+													board.guesses[i] &&
+													!board.active &&
+													board.word.includes(letter)
+												) {
+													greenYellow--
 												}
 											}
-											colorClass = 'key-inactive'
+
+											if (greenYellow > 0) {
+												colorClass = 'key-green-yellow'
+											} else if (grey > 0) {
+												colorClass = 'key-inactive'
+											}
 											break
 										}
 									}
