@@ -6,6 +6,10 @@ $small-width: 5rem + 2rem * 25;
 .icon {
 	height: 1.5rem;
 	margin-right: 0.5rem;
+
+	.grid-nav & {
+		display: none;
+	}
 }
 
 .grid-nav {
