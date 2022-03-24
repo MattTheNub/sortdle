@@ -33,7 +33,7 @@ const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
 				</div>
 				<div className="keyboard">
 					{['qwertyuiop', 'asdfghjkl', 'zxcvbnm'].map((row, i) => (
-						<div className="keyboard-row">
+						<div className="keyboard-row" key={i}>
 							{i === 2 && (
 								<Button
 									variant="secondary"
@@ -50,7 +50,7 @@ const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
 									Del
 								</Button>
 							)}
-							{[...row].map(letter => {
+							{[...row].map((letter, j) => {
 								let colorClass = ''
 
 								if (BANNED_LETTERS.has(letter)) {
@@ -112,6 +112,7 @@ const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
 												update()
 											}
 										}}
+										key={j}
 									>
 										{letter}
 									</Button>
