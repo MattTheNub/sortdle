@@ -20,7 +20,7 @@ const Help: FunctionComponent = () => {
 					<p>
 						In Sortdle, your aim is to guess five different five-letter words
 						simultaneously. You get 11 tries to do this. On each try, you can
-						make <strong>one</strong> guess. The same guess appear on{' '}
+						make <strong>one</strong> guess. The same guess appears on{' '}
 						<strong>all five</strong> boards, showing you how close you were to
 						each word.
 					</p>
