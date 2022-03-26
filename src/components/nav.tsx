@@ -3,6 +3,8 @@ import { Navbar, Container, Nav } from 'react-bootstrap'
 import Help from './help'
 // @ts-ignore
 import icon from '../../assets/icon.png'
+// @ts-ignore
+import githubMark from '../../assets/github-mark.png'
 
 const SortdleNav: FunctionComponent<{ mode: 'top' | 'grid' }> = ({ mode }) => (
 	<Navbar
@@ -18,8 +20,8 @@ const SortdleNav: FunctionComponent<{ mode: 'top' | 'grid' }> = ({ mode }) => (
 				Sortdle
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav>
+			<Navbar.Collapse style={{ flexGrow: 1 }} id="basic-navbar-nav">
+				<Nav style={{ flexGrow: 1 }}>
 					<Nav.Link href="#daily" active={window.location.hash !== '#random'}>
 						Daily
 					</Nav.Link>
@@ -27,6 +29,14 @@ const SortdleNav: FunctionComponent<{ mode: 'top' | 'grid' }> = ({ mode }) => (
 						Random
 					</Nav.Link>
 					<Help />
+					<div className="nav-right">
+						<Nav.Link
+							target="_blank"
+							href="https://github.com/MattTheNub/sortdle"
+						>
+							<img style={{ height: '1.5rem' }} src={githubMark}></img>
+						</Nav.Link>
+					</div>
 				</Nav>
 			</Navbar.Collapse>
 		</Container>
