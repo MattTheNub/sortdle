@@ -56,8 +56,8 @@ const Help: FunctionComponent = () => {
 						the wrong spot.
 					</p>
 					<p>
-						There can be at most <strong>three</strong> blue letters in any
-						word.
+						You can guess as many blue letters as you want, but an answer will
+						never contain more than <strong>three</strong> blue letters.
 					</p>
 					<h3>Example</h3>
 					<div style={{ display: 'inline-flex', flexFlow: 'row' }}>
