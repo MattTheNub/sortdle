@@ -1,6 +1,6 @@
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
 body {
 	$primary: #012345;
@@ -34,7 +34,16 @@ body {
 	--#{$variable-prefix}body-bg: #{$body-bg};
 }
 
-@import 'bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/containers';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/modal';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/close';
+@import '~bootstrap/scss/helpers/position';
+@import '~bootstrap/scss/bootstrap-utilities';
 
 .modal-header {
 	font-size: 2em;
