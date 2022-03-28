@@ -4,6 +4,9 @@ import seedrandom from 'seedrandom'
 export function getDailySeed() {
 	return Math.floor((Date.now() / 1000 / 60 / 60 - 4) / 24)
 }
+function dailyNumber() {
+	return Math.floor((Date.now() / 1000 / 60 / 60 - 4) / 24) - 19062
+}
 
 const assets = import('./assets')
 const answers = assets.then(assets => assets.answers)
@@ -15,6 +18,7 @@ export default class GameState {
 	curGuess: string = ''
 	wantsCompleteDialog = false
 	wantsFailDialog = false
+	dailyNumber: number | null = null
 
 	constructor(
 		public readonly seed: string,
@@ -23,6 +27,10 @@ export default class GameState {
 		answers: string[],
 	) {
 		const rng = seedrandom(seed)
+
+		if (prefix === 'daily') {
+			this.dailyNumber = dailyNumber()
+		}
 
 		for (let i = 0; i < 5; i++) {
 			let answer: string

@@ -89,7 +89,7 @@ const Share: FunctionComponent<{ state: GameState }> = ({ state }) => {
 
 	const shareText = () => {
 		const text = generateText(state)
-		const shareData = { title: 'Daily Sortdle', text }
+		const shareData = { title: `Daily Sortdle #${state.dailyNumber}`, text }
 		if (isMobile() && navigator.share) {
 			navigator.share(shareData).catch(console.error)
 		}
@@ -100,7 +100,7 @@ const Share: FunctionComponent<{ state: GameState }> = ({ state }) => {
 		if (!image) return
 
 		const shareData = {
-			title: 'Daily Sortdle',
+			title: `Daily Sortdle #${state.dailyNumber}`,
 			files: [new File([image], 'sortdle.png')],
 		}
 		if (navigator.share) {
@@ -119,7 +119,8 @@ const Share: FunctionComponent<{ state: GameState }> = ({ state }) => {
 			)}
 			{text && (
 				<pre className="share-text">
-					Daily Sortdle{'\n'}
+					Daily Sortdle #{state.dailyNumber}
+					{'\n'}
 					{text}
 				</pre>
 			)}
