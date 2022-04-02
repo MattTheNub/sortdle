@@ -55,7 +55,7 @@ const Keyboard: FunctionComponent = () => {
 							{[...row].map((letter, j) => {
 								let colorClass = ''
 
-								if (BANNED_LETTERS.has(letter)) {
+								if (state.settings.blues && BANNED_LETTERS.has(letter)) {
 									colorClass = 'key-blue'
 								} else {
 									// check all letters were grey the last time
