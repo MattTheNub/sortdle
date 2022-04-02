@@ -1,7 +1,9 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useContext, useState } from 'react'
+import { StateContext } from '../context'
 import GameState from '../state'
 
-const WordList: FunctionComponent<{ state: GameState }> = ({ state }) => {
+const WordList: FunctionComponent = () => {
+	const state = useContext(StateContext)
 	if (!state.boards[0].guesses.length) {
 		return <></>
 	}

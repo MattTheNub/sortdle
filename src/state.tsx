@@ -1,10 +1,10 @@
 import { BANNED_LETTERS } from './constants'
 import seedrandom from 'seedrandom'
 
-export function getDailySeed() {
-	return Math.floor((Date.now() / 1000 / 60 / 60 - 4) / 24)
+export function getDailySeed(number = dailyNumber()) {
+	return number + 19062
 }
-function dailyNumber() {
+export function dailyNumber() {
 	return Math.floor((Date.now() / 1000 / 60 / 60 - 4) / 24) - 19062
 }
 
@@ -25,6 +25,10 @@ export default class GameState {
 		public readonly prefix: string,
 		public allowedWords: Set<string>,
 		answers: string[],
+		public settings: Settings = {
+			blues: true,
+			swaps: true,
+		},
 	) {
 		const rng = seedrandom(seed)
 
@@ -57,12 +61,24 @@ export default class GameState {
 			await answers,
 		)
 	}
+	static async custom(settings: Settings, seed = Math.random().toString()) {
+		return new GameState(
+			seed,
+			'custom',
+			await allowedWords,
+			await answers,
+			settings,
+		)
+	}
 	static async load(prefix: string) {
 		let state = new GameState(
 			localStorage.getItem(`${prefix}Seed`) as string,
 			prefix,
 			await allowedWords,
 			await answers,
+			prefix === 'custom'
+				? JSON.parse(localStorage.getItem('customSettings') as string)
+				: undefined,
 		)
 
 		// load the previous guesses and hints
@@ -91,22 +107,24 @@ export default class GameState {
 		) {
 			const activeBoards = [0, 1, 2, 3, 4].filter(i => this.boards[i].active)
 
-			// swap two boards at random
-			// swaps happen always with three or more boards, and half of the
-			// time when there are only two boards
-			if (
-				activeBoards.length > 2 ||
-				(activeBoards.length === 2 && Math.random() < 0.5)
-			) {
-				let first = Math.floor(Math.random() * activeBoards.length)
-				let second
-				do {
-					second = Math.floor(Math.random() * activeBoards.length)
-				} while (second === first)
-				this.swap(activeBoards[first], activeBoards[second])
+			if (this.settings.swaps) {
+				// swap two boards at random
+				// swaps happen always with three or more boards, and half of the
+				// time when there are only two boards
+				if (
+					activeBoards.length > 2 ||
+					(activeBoards.length === 2 && Math.random() < 0.5)
+				) {
+					let first = Math.floor(Math.random() * activeBoards.length)
+					let second
+					do {
+						second = Math.floor(Math.random() * activeBoards.length)
+					} while (second === first)
+					this.swap(activeBoards[first], activeBoards[second])
+				}
 			}
 			for (const i of activeBoards) {
-				this.boards[i].guess(this.curGuess)
+				this.boards[i].guess(this.curGuess, this.settings.blues)
 			}
 			this.curGuess = ''
 
@@ -125,6 +143,10 @@ export default class GameState {
 		)
 		localStorage.setItem(`${this.prefix}Swaps`, JSON.stringify(this.swaps))
 		localStorage.setItem(`${this.prefix}Seed`, this.seed)
+
+		if (this.prefix === 'custom') {
+			localStorage.setItem('customSettings', JSON.stringify(this.settings))
+		}
 	}
 
 	swap(first: number, second: number, log: boolean = true) {
@@ -161,6 +183,10 @@ export default class GameState {
 			this.wantsFailDialog = true
 		}
 	}
+
+	active() {
+		return this.boards.some(board => board.active) && this.guessCount() < 11
+	}
 }
 
 export class BoardState {
@@ -169,7 +195,7 @@ export class BoardState {
 
 	constructor(public word: string) {}
 
-	guess(guess: string) {
+	guess(guess: string, blues: boolean) {
 		const word = this.word
 		const letters = []
 		const unusedLetters = [...word] // for double letters
@@ -185,7 +211,7 @@ export class BoardState {
 			let color
 			if (word[i] === letter) {
 				color = LetterColor.Green
-			} else if (BANNED_LETTERS.has(letter)) {
+			} else if (blues && BANNED_LETTERS.has(letter)) {
 				color = LetterColor.Blue
 			} else if (unusedLetters.includes(letter)) {
 				color = LetterColor.Yellow
@@ -218,4 +244,9 @@ export enum LetterColor {
 	Grey,
 	Yellow,
 	Green,
+}
+
+export type Settings = {
+	swaps: boolean
+	blues: boolean
 }

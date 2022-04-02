@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import Help from './help'
+import Custom from './custom'
 // @ts-ignore
 import icon from '../../assets/icon.png'
 // @ts-ignore
@@ -22,12 +23,16 @@ const SortdleNav: FunctionComponent<{ mode: 'top' | 'grid' }> = ({ mode }) => (
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse style={{ flexGrow: 1 }} id="basic-navbar-nav">
 				<Nav style={{ flexGrow: 1 }}>
-					<Nav.Link href="#daily" active={window.location.hash !== '#random'}>
+					<Nav.Link
+						href="#daily"
+						active={!['#random', '#custom'].includes(window.location.hash)}
+					>
 						Daily
 					</Nav.Link>
 					<Nav.Link href="#random" active={window.location.hash === '#random'}>
 						Random
 					</Nav.Link>
+					<Custom />
 					<Help />
 					<div className="nav-right">
 						<Nav.Link

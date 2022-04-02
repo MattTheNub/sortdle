@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import { StateContext } from '../context'
 import GameState from '../state'
 import Board from './board'
 import Complete from './complete'
@@ -8,10 +9,10 @@ import Keyboard from './keyboard'
 import SortdleNav from './nav'
 
 const Game: FunctionComponent<{ state: GameState }> = ({ state }) => (
-	<>
+	<StateContext.Provider value={state}>
 		<SortdleNav mode="top" />
-		<Complete state={state} />
-		<Fail state={state} />
+		<Complete />
+		<Fail />
 		<div className="game">
 			{state.boards.map((board, i) => {
 				const guesses = []
@@ -41,8 +42,8 @@ const Game: FunctionComponent<{ state: GameState }> = ({ state }) => (
 			})}
 			<SortdleNav mode="grid" />
 		</div>
-		<Keyboard state={state} />
-	</>
+		<Keyboard />
+	</StateContext.Provider>
 )
 
 export default Game

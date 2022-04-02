@@ -3,8 +3,13 @@ import { render } from 'react-dom'
 import GameState from './state'
 import { LETTERS } from './constants'
 import Game from './components/game'
+;(globalThis as any).state = null
+declare var state: GameState
 
-let state: GameState
+export function setGameState(newState: GameState) {
+	state = newState
+	update()
+}
 
 export async function loadState() {
 	const { default: GameState, getDailySeed } = await import('./state')
@@ -13,14 +18,22 @@ export async function loadState() {
 		case '#random':
 			if (localStorage.getItem('randomSeed') !== null) {
 				state = await GameState.load('random')
-				if (
-					!state.boards.some(board => board.active) ||
-					state.guessCount() >= 11
-				) {
+				if (!state.active()) {
 					state = await GameState.random()
 				}
 			} else {
 				state = await GameState.random()
+			}
+			break
+
+		case '#custom':
+			if (localStorage.getItem('customSeed') !== null) {
+				state = await GameState.load('custom')
+				if (!state.active()) {
+					state = await GameState.custom(state.settings)
+				}
+			} else {
+				window.location.replace('/')
 			}
 			break
 

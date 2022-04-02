@@ -1,11 +1,13 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useContext, useState } from 'react'
 import { Button, CloseButton } from 'react-bootstrap'
 import { update } from '..'
 import { BANNED_LETTERS } from '../constants'
+import { StateContext } from '../context'
 import GameState, { LetterColor } from '../state'
 import Guess from './guess'
 
-const Keyboard: FunctionComponent<{ state: GameState }> = ({ state }) => {
+const Keyboard: FunctionComponent = () => {
+	const state = useContext(StateContext)
 	const [show, setShow] = useState(false)
 
 	return (

@@ -1,5 +1,6 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useContext, useState } from 'react'
 import { Button } from 'react-bootstrap'
+import { StateContext } from '../context'
 import GameState, { LetterColor } from '../state'
 import { isMobile } from '../util'
 
@@ -79,7 +80,8 @@ function generateImage(state: GameState) {
 	})
 }
 
-const Share: FunctionComponent<{ state: GameState }> = ({ state }) => {
+const Share: FunctionComponent = () => {
+	const state = useContext(StateContext)
 	const [text, setText] = useState<string | null>(null)
 	const [image, setImage] = useState<Blob | null>(null)
 
