@@ -37,10 +37,11 @@ function generateText(state: GameState) {
 }
 
 function generateImage(state: GameState) {
+	const TEXT_HEIGHT = 36
 	return new Promise<Blob | null>(resolve => {
 		const canvas = document.createElement('canvas')
 		canvas.width = 35 * 5 * 5 - 15
-		canvas.height = 32 * state.guessCount() + 5
+		canvas.height = 32 * state.guessCount() + 5 + TEXT_HEIGHT
 		const ctx = canvas.getContext('2d')
 
 		if (!ctx) {
@@ -69,10 +70,22 @@ function generateImage(state: GameState) {
 							break
 					}
 
-					ctx.fillRect(i * 35 * 5 + k * 32 + 2, j * 32 + 2, 28, 28)
+					ctx.fillRect(
+						i * 35 * 5 + k * 32 + 2,
+						j * 32 + 2 + TEXT_HEIGHT,
+						28,
+						28,
+					)
 				})
 			})
 		})
+
+		const text = `Daily Sortdle #${state.dailyNumber}`
+		ctx.fillStyle = 'white'
+		ctx.strokeStyle = 'black'
+		ctx.font = '24px sans-serif'
+		ctx.fillText(text, 0, 24)
+		ctx.strokeText(text, 0, 24)
 
 		canvas.toBlob(blob => {
 			resolve(blob)
@@ -103,7 +116,7 @@ const Share: FunctionComponent = () => {
 
 		const shareData = {
 			title: `Daily Sortdle #${state.dailyNumber}`,
-			files: [new File([image], 'sortdle.png')],
+			files: [new File([image], `sortdle-${state.dailyNumber}.png`)],
 		}
 		if (navigator.share) {
 			navigator.share(shareData).catch(console.error)
