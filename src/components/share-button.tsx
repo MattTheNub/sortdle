@@ -128,7 +128,11 @@ const Share: FunctionComponent = () => {
 			<Button onClick={shareText}>Share Text</Button>
 			{image && <Button onClick={shareImage}>Share Image</Button>}
 			{image && (
-				<Button as="a" href={URL.createObjectURL(image)} download="sortdle.png">
+				<Button
+					as="a"
+					href={URL.createObjectURL(image)}
+					download={`sortdle-${state.dailyNumber}.png`}
+				>
 					Save Image
 				</Button>
 			)}
