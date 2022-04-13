@@ -83,7 +83,7 @@ function generateImage(state: GameState) {
 		const text = `Daily Sortdle #${state.dailyNumber}`
 		ctx.fillStyle = 'white'
 		ctx.strokeStyle = 'black'
-		ctx.font = '24px sans-serif'
+		ctx.font = 'bold 24px sans-serif'
 		ctx.fillText(text, 0, 24)
 		ctx.strokeText(text, 0, 24)
 
