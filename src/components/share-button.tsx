@@ -5,7 +5,7 @@ import GameState, { LetterColor } from '../state'
 import { isMobile } from '../util'
 
 function generateText(state: GameState) {
-	let text = ''
+	let text = `Daily Sortdle #${state.dailyNumber}\n`
 	for (let i = 0; i < state.guessCount(); i++) {
 		for (const board of state.boards) {
 			for (const letter of board.guesses[i] ?? new Array(5)) {
@@ -136,13 +136,7 @@ const Share: FunctionComponent = () => {
 					Save Image
 				</Button>
 			)}
-			{text && (
-				<pre className="share-text">
-					Daily Sortdle #{state.dailyNumber}
-					{'\n'}
-					{text}
-				</pre>
-			)}
+			{text && <pre className="share-text">{text}</pre>}
 		</>
 	)
 }
