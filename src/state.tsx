@@ -187,6 +187,10 @@ export default class GameState {
 	active() {
 		return this.boards.some(board => board.active) && this.guessCount() < 11
 	}
+
+	correctCount() {
+		return this.boards.reduce((prev, cur) => prev + (cur.active ? 0 : 1), 0)
+	}
 }
 
 export class BoardState {

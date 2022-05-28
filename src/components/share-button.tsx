@@ -5,7 +5,7 @@ import GameState, { LetterColor } from '../state'
 import { isMobile } from '../util'
 
 function generateText(state: GameState) {
-	let text = `Daily Sortdle #${state.dailyNumber}\n`
+	let text = `Daily Sortdle #${state.dailyNumber} ${state.correctCount()}/5\n`
 	for (let i = 0; i < state.guessCount(); i++) {
 		for (const board of state.boards) {
 			for (const letter of board.guesses[i] ?? new Array(5)) {
@@ -80,7 +80,7 @@ function generateImage(state: GameState) {
 			})
 		})
 
-		const text = `Daily Sortdle #${state.dailyNumber}`
+		const text = `Daily Sortdle #${state.dailyNumber} ${state.correctCount()}/5`
 		ctx.fillStyle = 'white'
 		ctx.strokeStyle = 'black'
 		ctx.font = 'bold 24px sans-serif'
@@ -104,7 +104,10 @@ const Share: FunctionComponent = () => {
 
 	const shareText = () => {
 		const text = generateText(state)
-		const shareData = { title: `Daily Sortdle #${state.dailyNumber}`, text }
+		const shareData = {
+			title: `Daily Sortdle #${state.dailyNumber} ${state.correctCount()}/5`,
+			text,
+		}
 		if (isMobile() && navigator.share) {
 			navigator.share(shareData).catch(console.error)
 		}
@@ -115,7 +118,7 @@ const Share: FunctionComponent = () => {
 		if (!image) return
 
 		const shareData = {
-			title: `Daily Sortdle #${state.dailyNumber}`,
+			title: `Daily Sortdle #${state.dailyNumber} ${state.correctCount()}/5`,
 			files: [new File([image], `sortdle-${state.dailyNumber}.png`)],
 		}
 		if (navigator.share) {
