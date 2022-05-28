@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@parcel/config-default': ^2.3.2
@@ -19,13 +19,13 @@ specifiers:
   react-bootstrap: ^2.2.0
   react-dom: ^17.0.2
   seedrandom: ^3.0.5
-  typescript: ^4.7.0-dev.20220317
+  typescript: ^4.6.2
 
 dependencies:
   '@popperjs/core': 2.11.2
   bootstrap: 5.1.3_@popperjs+core@2.11.2
   react: 17.0.2
-  react-bootstrap: 2.2.0_react-dom@17.0.2+react@17.0.2
+  react-bootstrap: 2.2.0_sfoxds7t5ydpegc3knd667wn6m
   react-dom: 17.0.2_react@17.0.2
   seedrandom: 3.0.5
 
@@ -33,7 +33,7 @@ devDependencies:
   '@parcel/config-default': 2.3.2_@parcel+core@2.3.2
   '@parcel/core': 2.3.2
   '@parcel/transformer-sass': 2.3.2_@parcel+core@2.3.2
-  '@parcel/transformer-typescript-tsc': 2.3.2_04cce4f880ae1348e33a6bf32474021e
+  '@parcel/transformer-typescript-tsc': 2.3.2_lpqwacgbhcdhpxi6s4mmezkq6i
   '@types/node': 17.0.21
   '@types/react': 17.0.39
   '@types/react-dom': 17.0.13
@@ -42,7 +42,7 @@ devDependencies:
   parcel: 2.3.2
   path-browserify: 1.0.1
   process: 0.11.10
-  typescript: 4.7.0-dev.20220317
+  typescript: 4.7.2
 
 packages:
 
@@ -681,7 +681,7 @@ packages:
       - '@parcel/core'
     dev: true
 
-  /@parcel/transformer-typescript-tsc/2.3.2_04cce4f880ae1348e33a6bf32474021e:
+  /@parcel/transformer-typescript-tsc/2.3.2_lpqwacgbhcdhpxi6s4mmezkq6i:
     resolution: {integrity: sha512-29Y9eMnC+PbP2g6wKXhN6yPVarautsNrbSrRaJENQySAQavv52qxvAPC8LVremSYEeYbgxrg/3TT5rq48kt1Ng==}
     engines: {node: '>= 12.0.0', parcel: ^2.3.2}
     peerDependencies:
@@ -689,20 +689,20 @@ packages:
     dependencies:
       '@parcel/plugin': 2.3.2_@parcel+core@2.3.2
       '@parcel/source-map': 2.0.2
-      '@parcel/ts-utils': 2.3.2_typescript@4.7.0-dev.20220317
-      typescript: 4.7.0-dev.20220317
+      '@parcel/ts-utils': 2.3.2_typescript@4.7.2
+      typescript: 4.7.2
     transitivePeerDependencies:
       - '@parcel/core'
     dev: true
 
-  /@parcel/ts-utils/2.3.2_typescript@4.7.0-dev.20220317:
+  /@parcel/ts-utils/2.3.2_typescript@4.7.2:
     resolution: {integrity: sha512-jYCHoSmU+oVtFA4q0BygVf74FpVnCDSNtVfLzd1EfGVHlBFMo9GzSY5luMTG4qhnNCDEEco89bkMIgjPHQ3qnA==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
       typescript: '>=3.0.0'
     dependencies:
       nullthrows: 1.1.1
-      typescript: 4.7.0-dev.20220317
+      typescript: 4.7.2
     dev: true
 
   /@parcel/types/2.3.2:
@@ -790,7 +790,7 @@ packages:
       react: 17.0.2
     dev: false
 
-  /@restart/ui/1.0.2_react-dom@17.0.2+react@17.0.2:
+  /@restart/ui/1.0.2_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-vKGe0UBJLnbvNAjr8ljlDvphf2HkpjBjXsblmgKPvKdZBDn/mtAz89wmznaomIaEJ9VNoSEY0vA5T5MDi2jIcQ==}
     peerDependencies:
       react: '>=16.14.0'
@@ -1942,7 +1942,7 @@ packages:
       react-is: 16.13.1
     dev: false
 
-  /react-bootstrap/2.2.0_react-dom@17.0.2+react@17.0.2:
+  /react-bootstrap/2.2.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-5d3hziBjNOAKWpss2B8C2qtSXp/Z3PiyuRdFJelvJeTsGn8vbFYOoYjmf+0Agq+jh46TG+mtBvrCoa4nBk0bkg==}
     peerDependencies:
       react: '>=16.14.0'
@@ -1950,7 +1950,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.17.2
       '@restart/hooks': 0.4.5_react@17.0.2
-      '@restart/ui': 1.0.2_react-dom@17.0.2+react@17.0.2
+      '@restart/ui': 1.0.2_sfoxds7t5ydpegc3knd667wn6m
       '@types/invariant': 2.2.35
       '@types/prop-types': 15.7.4
       '@types/react': 17.0.39
@@ -1963,7 +1963,7 @@ packages:
       prop-types-extra: 1.1.1_react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-transition-group: 4.4.2_react-dom@17.0.2+react@17.0.2
+      react-transition-group: 4.4.2_sfoxds7t5ydpegc3knd667wn6m
       uncontrollable: 7.2.1_react@17.0.2
       warning: 4.0.3
     dev: false
@@ -1992,7 +1992,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-transition-group/4.4.2_react-dom@17.0.2+react@17.0.2:
+  /react-transition-group/4.4.2_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==}
     peerDependencies:
       react: '>=16.6.0'
@@ -2151,8 +2151,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /typescript/4.7.0-dev.20220317:
-    resolution: {integrity: sha512-BSWI2k1HSHl/NfXlTgth+3J/2BqqhbqrZB0gtgNvDsHSpiVzt1WEkGV3yab/U8We9r6X8YLebW3AFWXm/b5DGQ==}
+  /typescript/4.7.2:
+    resolution: {integrity: sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
