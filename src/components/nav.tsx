@@ -26,13 +26,18 @@ const SortdleNav: FunctionComponent<{ mode: 'top' | 'grid' }> = ({ mode }) => (
 					<Nav.Link
 						href="#daily"
 						active={!['#random', '#custom'].includes(window.location.hash)}
+						onClick={e => (e.target as HTMLInputElement)?.blur()}
 					>
 						Daily
 					</Nav.Link>
-					<Nav.Link href="#random" active={window.location.hash === '#random'}>
+					<Nav.Link
+						href="#random"
+						active={window.location.hash === '#random'}
+						onClick={e => (e.target as HTMLInputElement)?.blur()}
+					>
 						Random
 					</Nav.Link>
-					<Custom />
+					<Custom type="nav">Custom</Custom>
 					<Help />
 					<div className="nav-right">
 						<Nav.Link

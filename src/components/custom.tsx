@@ -27,12 +27,15 @@ const PastDaily: FunctionComponent = () => {
 		</Form.Select>
 	)
 }
-
-const Custom: FunctionComponent = () => {
+const Custom: FunctionComponent<{
+	type: 'nav' | 'button'
+	onPlay?: (() => any) | null | undefined
+}> = ({ type, onPlay, children }) => {
 	const [show, setShow] = useState(false)
 	const [showContinue, setShowContinue] = useState(false)
 
 	const handleClose = () => setShow(false)
+
 	const handleShow = () => setShow(true)
 	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
@@ -65,6 +68,9 @@ const Custom: FunctionComponent = () => {
 		} else {
 			setGameState(await GameState.custom(settings))
 		}
+		if (onPlay) {
+			onPlay()
+		}
 		handleClose()
 		history.replaceState(null, '', `${window.location.pathname}#custom`)
 	}
@@ -91,17 +97,33 @@ const Custom: FunctionComponent = () => {
 
 	return (
 		<>
-			<Nav.Link
-				onClick={handleShow}
-				active={window.location.hash === '#custom'}
-			>
-				Custom
-			</Nav.Link>
+			{type == 'nav' ? (
+				<Nav.Link
+					onClick={e => {
+						;(e.target as HTMLInputElement)?.blur()
+						handleShow()
+					}}
+					active={window.location.hash === '#custom'}
+				>
+					{children}
+				</Nav.Link>
+			) : (
+				<Button onClick={handleShow}>{children}</Button>
+			)}
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>Custom Sortdle</Modal.Header>
 				<Modal.Body>
 					{showContinue && (
-						<Button variant="primary" href="#custom" onClick={handleClose}>
+						<Button
+							variant="primary"
+							href="#custom"
+							onClick={() => {
+								if (onPlay) {
+									onPlay()
+								}
+								handleClose()
+							}}
+						>
 							Continue Previous
 						</Button>
 					)}

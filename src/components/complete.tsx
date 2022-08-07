@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap'
 import { loadState } from '..'
 import { StateContext } from '../context'
 import GameState from '../state'
+import Custom from './custom'
 import ShareButton from './share-button'
 import WordList from './word-list'
 
@@ -25,15 +26,9 @@ const Complete: FunctionComponent = () => {
 				</Modal.Header>
 				<Modal.Body>
 					<WordList />
-					<Button
-						onClick={() => {
-							handleClose()
-							loadState()
-						}}
-						href="#random"
-					>
-						Play Random
-					</Button>
+					<Custom type="button" onPlay={handleClose}>
+						Play Custom
+					</Custom>
 					{state.prefix === 'daily' && <ShareButton />}
 				</Modal.Body>
 			</Modal>
