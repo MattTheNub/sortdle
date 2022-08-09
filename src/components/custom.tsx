@@ -65,6 +65,17 @@ const Custom: FunctionComponent<{
 					).toString(),
 				),
 			)
+		} else if (
+			(document.querySelector('#seeded-word') as HTMLInputElement).checked
+		) {
+			setGameState(
+				await GameState.custom(
+					settings,
+					(document.querySelector('#seed-input') as HTMLInputElement).value
+						.toLowerCase()
+						.trim(),
+				),
+			)
 		} else {
 			setGameState(await GameState.custom(settings))
 		}
@@ -144,6 +155,45 @@ const Custom: FunctionComponent<{
 								label={
 									<>
 										Past Daily: <PastDaily />
+									</>
+								}
+							/>
+							<Form.Check
+								name="words"
+								id="seeded-word"
+								type="radio"
+								label={
+									<>
+										Seed:{' '}
+										<Form.Control
+											type="text"
+											id="seed-input"
+											onClick={() =>
+												((
+													document.querySelector(
+														'#seeded-word',
+													) as HTMLInputElement
+												).checked = true)
+											}
+											defaultValue={Math.floor(Math.random() * 1e10).toString()}
+										/>
+										<Button
+											variant="secondary"
+											onClick={() => {
+												;(
+													document.querySelector(
+														'#seeded-word',
+													) as HTMLInputElement
+												).checked = true
+												;(
+													document.querySelector(
+														'#seed-input',
+													) as HTMLInputElement
+												).value = Math.floor(Math.random() * 1e10).toString()
+											}}
+										>
+											Randomize
+										</Button>
 									</>
 								}
 							/>

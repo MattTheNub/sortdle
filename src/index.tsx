@@ -63,12 +63,14 @@ export function update() {
 }
 
 document.addEventListener('keypress', event => {
+	if (document.activeElement?.tagName === 'INPUT') return
 	if (LETTERS.has(event.key.toLowerCase()) && state.curGuess.length < 5) {
 		state.curGuess += event.key.toLowerCase()
 		update()
 	}
 })
 document.addEventListener('keydown', event => {
+	if (document.activeElement?.tagName === 'INPUT') return
 	if (event.key === 'Backspace') {
 		if (event.ctrlKey) {
 			state.curGuess = ''
