@@ -3,6 +3,7 @@ import { StateContext } from '../context'
 import GameState from '../state'
 import Board from './board'
 import Complete from './complete'
+import Custom from './custom'
 import Fail from './fail'
 import Guess from './guess'
 import Keyboard from './keyboard'
@@ -13,6 +14,7 @@ const Game: FunctionComponent<{ state: GameState }> = ({ state }) => (
 		<SortdleNav mode="top" />
 		<Complete />
 		<Fail />
+		<Custom type="onLoad" />
 		<div className="game">
 			{state.boards.map((board, i) => {
 				const guesses = []

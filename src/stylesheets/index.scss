@@ -265,3 +265,8 @@ body {
 	user-select: all;
 	font-family: var(--bs-font-sans-serif);
 }
+
+.custom-overwrite-warning {
+	color: red;
+	font-weight: 700;
+}
