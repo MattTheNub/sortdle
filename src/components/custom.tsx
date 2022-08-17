@@ -1,7 +1,6 @@
-import { FormEvent, FunctionComponent, useContext, useState } from 'react'
-import { Button, Form, Modal, Nav, ToggleButton } from 'react-bootstrap'
-import { setGameState, update } from '..'
-import { StateContext } from '../context'
+import { FormEvent, FunctionComponent, useState } from 'react'
+import { Button, Form, Modal, Nav } from 'react-bootstrap'
+import { setGameState } from '..'
 import { dailyNumber, getDailySeed } from '../state'
 
 function tryParseURL() {

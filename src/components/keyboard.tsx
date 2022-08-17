@@ -3,7 +3,7 @@ import { Button, CloseButton } from 'react-bootstrap'
 import { update } from '..'
 import { BANNED_LETTERS } from '../constants'
 import { StateContext } from '../context'
-import GameState, { LetterColor } from '../state'
+import { LetterColor } from '../state'
 import Guess from './guess'
 
 const Keyboard: FunctionComponent = () => {

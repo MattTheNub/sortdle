@@ -1,6 +1,5 @@
-import { FunctionComponent, useContext, useState } from 'react'
+import { FunctionComponent, useContext } from 'react'
 import { StateContext } from '../context'
-import GameState from '../state'
 
 const WordList: FunctionComponent = () => {
 	const state = useContext(StateContext)
