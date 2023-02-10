@@ -8,7 +8,8 @@ const Letter: FunctionComponent<{
 	color: LetterColor | null
 	red?: boolean
 	active?: boolean
-}> = ({ red, color, children, active }) => {
+	inactive?: boolean
+}> = ({ red, color, children, active, inactive }) => {
 	const state = useContext(StateContext)
 
 	return (
@@ -27,7 +28,7 @@ const Letter: FunctionComponent<{
 						  BANNED_LETTERS.has(children.toString())
 						? 'typing-letter-blue'
 						: ''
-				}`}
+				} ${inactive ? 'typing-letter-inactive' : ''}`}
 			>
 				{children}
 			</span>

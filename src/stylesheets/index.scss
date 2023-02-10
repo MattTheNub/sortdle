@@ -164,6 +164,9 @@ body {
 	&.typing-letter-red {
 		color: #e22;
 	}
+	&.typing-letter-inactive {
+		opacity: 0.5;
+	}
 }
 
 .answer {
@@ -271,4 +274,3 @@ body {
 	color: red;
 	font-weight: 700;
 }
-
