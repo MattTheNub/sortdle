@@ -19,7 +19,7 @@ const Help: FunctionComponent = () => {
 		<>
 			<Nav.Link onClick={handleShow}>Help</Nav.Link>
 
-			<Modal show={show} onHide={handleClose}>
+			<Modal show={show} onHide={handleClose} className="help-dialog">
 				<Modal.Header closeButton>How to Play Sortdle</Modal.Header>
 				<Modal.Body>
 					<p>
