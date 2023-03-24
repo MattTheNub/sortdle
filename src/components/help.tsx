@@ -10,6 +10,11 @@ const Help: FunctionComponent = () => {
 	const handleClose = () => setShow(false)
 	const handleShow = () => setShow(true)
 
+	if (localStorage.getItem('seenTutorial') !== 'true') {
+		localStorage.setItem('seenTutorial', 'true')
+		setShow(true)
+	}
+
 	return (
 		<>
 			<Nav.Link onClick={handleShow}>Help</Nav.Link>
