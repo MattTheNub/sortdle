@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { Modal, Nav } from 'react-bootstrap'
 import { BANNED_LETTERS } from '../constants'
 import { LetterColor } from '../state'
@@ -10,10 +10,12 @@ const Help: FunctionComponent = () => {
 	const handleClose = () => setShow(false)
 	const handleShow = () => setShow(true)
 
-	if (localStorage.getItem('seenTutorial') !== 'true') {
-		localStorage.setItem('seenTutorial', 'true')
-		setShow(true)
-	}
+	useEffect(() => {
+		if (localStorage.getItem('seenTutorial') !== 'true') {
+			localStorage.setItem('seenTutorial', 'true')
+			setShow(true)
+		}
+	}, [])
 
 	return (
 		<>
