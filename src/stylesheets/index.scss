@@ -107,6 +107,11 @@ body {
 
 	display: flex;
 	flex-flow: row;
+	transition: opacity 100ms linear;
+}
+
+.guess-hidden {
+	opacity: 0.2;
 }
 
 .letter-container {

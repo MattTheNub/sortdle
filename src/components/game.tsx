@@ -8,6 +8,7 @@ import Fail from './fail'
 import Guess from './guess'
 import Keyboard from './keyboard'
 import SortdleNav from './nav'
+import { update } from '..'
 
 const Game: FunctionComponent<{ state: GameState }> = ({ state }) => (
 	<StateContext.Provider value={state}>
@@ -36,7 +37,19 @@ const Game: FunctionComponent<{ state: GameState }> = ({ state }) => (
 							/>,
 						)
 					} else {
-						guesses.push(<Guess key={j} data={board.guesses[j]} />)
+						guesses.push(
+							<Guess
+								key={j}
+								hidden={board.isHidden(j)}
+								data={board.guesses[j]}
+								toggleHidden={() => {
+									if (board.guesses[j]) {
+										board.toggleGuess(j)
+										update()
+									}
+								}}
+							/>,
+						)
 					}
 				}
 

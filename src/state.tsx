@@ -89,6 +89,7 @@ export default class GameState {
 		).forEach((board, i) => {
 			state.boards[i].active = board.active
 			state.boards[i].guesses = board.guesses
+			state.boards[i].hiddenGuesses = board.hiddenGuesses
 		})
 		state.swaps = JSON.parse(localStorage.getItem(`${prefix}Swaps`) as string)
 		// simulate each swap
@@ -194,6 +195,7 @@ export default class GameState {
 }
 
 export class BoardState {
+	hiddenGuesses: number[] | undefined
 	guesses: LetterGuess[][] = []
 	active = true
 
@@ -235,6 +237,25 @@ export class BoardState {
 		if (word === guess) {
 			this.active = false
 		}
+	}
+
+	toggleGuess(row: number) {
+		if (this.hiddenGuesses === undefined) {
+			this.hiddenGuesses = []
+		}
+
+		if (this.hiddenGuesses.includes(row)) {
+			this.hiddenGuesses.splice(this.hiddenGuesses.indexOf(row), 1)
+		} else {
+			this.hiddenGuesses.push(row)
+		}
+	}
+
+	isHidden(row: number) {
+		if (this.hiddenGuesses === undefined) {
+			return false
+		}
+		return this.hiddenGuesses.includes(row)
 	}
 }
 

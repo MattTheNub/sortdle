@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent, useContext, useState } from 'react'
 import { BANNED_LETTERS } from '../constants'
 import { StateContext } from '../context'
 import { LetterColor } from '../state'
@@ -12,7 +12,9 @@ import('../assets').then(assets => {
 const Guess: FunctionComponent<{
 	data?: { letter: string; color: LetterColor | null }[]
 	active?: boolean
-}> = ({ data, active }) => {
+	hidden?: boolean
+	toggleHidden?: () => void
+}> = ({ data, active, hidden, toggleHidden }) => {
 	const state = useContext(StateContext)
 	const letters: JSX.Element[] = []
 	const guess = data?.map(e => e.letter).join('')
@@ -79,7 +81,16 @@ const Guess: FunctionComponent<{
 		}
 	}
 
-	return <div className={`guess ${active ? 'active' : ''}`}>{letters}</div>
+	return (
+		<div
+			className={`guess ${active ? 'active' : ''} ${
+				hidden ? 'guess-hidden' : ''
+			}`}
+			onDoubleClick={toggleHidden}
+		>
+			{letters}
+		</div>
+	)
 }
 
 export default Guess
